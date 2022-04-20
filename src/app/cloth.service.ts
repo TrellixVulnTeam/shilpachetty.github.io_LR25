@@ -35,6 +35,9 @@ export class ClothService {
     return this.cart;
   }
 
+  removeItem(item: Clothing): void{
+    
+  }
   getTotal(): number{
     return this.cart.length;
   }

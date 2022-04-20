@@ -17,6 +17,9 @@ import { CartComponent } from './cart/cart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatBadgeModule } from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from "@angular/material/dialog";
+import { RemovedialogComponent } from './cart/removedialog/removedialog.component';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     ClothingComponent,
     ShoesComponent,
     CartComponent,
+    RemovedialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatBadgeModule,
     FormsModule,
+    MatDialogModule,
+    MatIconModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.

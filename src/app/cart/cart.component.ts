@@ -4,6 +4,10 @@ import { ClothService } from '../cloth.service';
 import { isNgTemplate } from '@angular/compiler';
 import { Router } from '@angular/router';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { RemovedialogComponent } from './removedialog/removedialog.component';
+
 
 
 @Component({
@@ -13,11 +17,17 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class CartComponent implements OnInit {
 
+  notifierSubscription: Subscription = this.clothService.subjectNotifier.subscribe(notified => {
+    // originator has notified me. refresh my data here.
+    this.totalItems = this.clothService.getTotal();
+  });
+
   cart: Clothing[] = [];
   totalPrice: number = 0;
+  totalItems: number = 0;
 
 
-  constructor(private clothService: ClothService, private snackBar: MatSnackBar) { }
+  constructor(private clothService: ClothService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   getItems(): void {
     this.cart = this.clothService.getCartItems();
@@ -54,6 +64,18 @@ export class CartComponent implements OnInit {
     this.snackBar.open(content, '',{
       duration: 500
     });
+  }
+
+  openDialog(item: Clothing): void{
+    let dialogRef = this.dialog.open(RemovedialogComponent, {
+      width: '250px',
+      data: {rItem: item  }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.removeItem(item);
+    });
+
   }
 
   

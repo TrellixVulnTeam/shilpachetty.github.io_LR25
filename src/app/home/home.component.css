@@ -12,7 +12,8 @@ h3{
 }
 
 img {
-    object-fit: contain;
+    max-height: 400px;
+    object-fit: fit;
 }
 
 p {
